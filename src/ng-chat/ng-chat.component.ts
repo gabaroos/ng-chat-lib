@@ -799,4 +799,8 @@ export class NgChat implements OnInit, IChatController {
             }
         }
     }
+
+    public isGroupAdapterDefined(): boolean {
+        return this.groupAdapter !== undefined && this.groupAdapter !== null;
+    }
 }
