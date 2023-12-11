@@ -1,6 +1,6 @@
 {
-  "name": "ng-chat",
-  "version": "3.1.0",
+  "name": "ng-chat-lib-test",
+  "version": "3.2.0",
   "peerDependencies": {
     "@angular/common": "*",
     "@angular/core": "*",
@@ -8,20 +8,20 @@
     "rxjs": "*"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "^12.0.5",
-    "@angular/common": "^12.0.5",
-    "@angular/compiler": "^12.0.5",
-    "@angular/compiler-cli": "^12.0.5",
-    "@angular/core": "^12.0.5",
-    "@angular/forms": "^12.0.5",
-    "@angular/platform-browser": "^12.0.5",
+    "@angular-devkit/build-angular": "^13.3.11",
+    "@angular/common": "~13.4.0",
+    "@angular/compiler": "~13.4.0",
+    "@angular/compiler-cli": "~13.4.0",
+    "@angular/core": "~13.4.0",
+    "@angular/forms": "~13.4.0",
+    "@angular/platform-browser": "~13.4.0",
     "gulp": "~4.0.2",
     "gulp-inline-ng2-template": "^5.0.1",
-    "ng-packagr": "^12.0.6",
+    "ng-packagr": "^13.0.8",
     "rollup": "^2.52.1",
     "rxjs": "^7.1.0",
     "tsickle": "^0.43.0",
-    "typescript": "~4.2.4",
+    "typescript": "~4.6.4",
     "uglify-js": "^3.13.9",
     "zone.js": "^0.11.4"
   },
