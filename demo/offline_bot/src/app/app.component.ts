@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ChatAdapter } from 'ng-chat-lib-test';
+import { ChatAdapter } from 'ng-chat-lib';
 import { DemoAdapter } from './demo-adapter';
 import { DemoAdapterPagedHistory } from './demo-adapter-paged-history';
 

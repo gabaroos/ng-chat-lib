@@ -41,7 +41,12 @@
 			<ng-container [ngSwitch]="message.type">
 				<div *ngSwitchCase="MessageType.Text" [ngClass]="{'sent-chat-message-container': message.fromId == userId, 'received-chat-message-container': message.fromId != userId}">
           <span [innerHtml]="message.message | emojify:emojisEnabled | linkfy:linkfyEnabled"></span>
-					<span *ngIf="showMessageDate && message.dateSent" class="message-sent-date">{{message.dateSent | date:messageDatePipeFormat}}</span>
+					<span *ngIf="showMessageDate && message.dateSent" class="message-sent-date">{{message.dateSent | date:messageDatePipeFormat}} 
+						<span [ngClass]="{'message-sent-read': message.dateSeen	}">
+							<span *ngIf="showMessageDate && message.dateSent && message.fromId == userId">✓</span>
+							<span *ngIf="showMessageDate && message.dateReceived && message.fromId == userId">✓</span>
+						</span>
+					</span>
 				</div>
         <div *ngSwitchCase="MessageType.Image" [ngClass]="{'sent-chat-message-container': message.fromId == userId, 'received-chat-message-container': message.fromId != userId}">
 

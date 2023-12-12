@@ -1,4 +1,4 @@
-import { ChatAdapter, IChatGroupAdapter, Group, User, Message, ChatParticipantStatus, PagedHistoryChatAdapter, ParticipantResponse, ParticipantMetadata } from 'ng-chat-lib-test';
+import { ChatAdapter, IChatGroupAdapter, Group, User, Message, ChatParticipantStatus, PagedHistoryChatAdapter, ParticipantResponse, ParticipantMetadata } from 'ng-chat-lib';
 import { Observable, of } from 'rxjs';
 import { DemoAdapter } from './demo-adapter';
 import { delay } from "rxjs/operators";
