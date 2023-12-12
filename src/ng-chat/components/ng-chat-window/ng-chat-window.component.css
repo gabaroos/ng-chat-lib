@@ -116,6 +116,10 @@
                 text-align: right;
                 margin-top: 5px;
             }
+            .ng-chat-window .ng-chat-messages .ng-chat-message .message-sent-read
+            {
+                color:#03f43f
+            }
         .ng-chat-window .ng-chat-messages .ng-chat-message > div
         {
             float: right;

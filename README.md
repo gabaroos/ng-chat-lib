@@ -1,3 +1,7 @@
+##### ORIENTAÇÕES SAIPHER #####
+
+Dentro de demo/offline_bot, package.json, o "ng-chat-lib": "file:../../src/dist" está configurado para utilizar a lib local, dentro do src executar npm run build-watch.
+
 # ng-chat
 
 [![npm](https://img.shields.io/npm/v/ng-chat.svg)](https://www.npmjs.com/package/ng-chat)
