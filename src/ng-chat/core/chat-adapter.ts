@@ -25,10 +25,17 @@ export abstract class ChatAdapter
     {
         this.messageReceivedHandler(participant, message);
     }
+
+    public onMessageRead(participant: IChatParticipant): void
+    {
+        this.messageReadHandler(participant);
+    }
     
     // Event handlers
     /** @internal */
     friendsListChangedHandler: (participantsResponse: ParticipantResponse[]) => void  = (participantsResponse: ParticipantResponse[]) => {};
     /** @internal */
     messageReceivedHandler: (participant: IChatParticipant, message: Message) => void = (participant: IChatParticipant, message: Message) => {};
+    /** @internal */
+    messageReadHandler: (participant: IChatParticipant) => void = (participant: IChatParticipant) => {};
 }

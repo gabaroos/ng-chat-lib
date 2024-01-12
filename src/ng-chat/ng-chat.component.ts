@@ -79,7 +79,7 @@ export class NgChat implements OnInit, IChatController {
     public isCollapsed: boolean = false;
 
     @Input()
-    public maximizeWindowOnNewMessage: boolean = true;
+    public maximizeWindowOnNewMessage: boolean = false;
 
     @Input()
     public pollFriendsList: boolean = false;
@@ -263,6 +263,8 @@ export class NgChat implements OnInit, IChatController {
                 // Binding event listeners
                 this.adapter.messageReceivedHandler = (participant, msg) => this.onMessageReceived(participant, msg);
                 this.adapter.friendsListChangedHandler = (participantsResponse) => this.onFriendsListChanged(participantsResponse);
+                // Novo Listener para atualizar mensagens lidas na janela
+                this.adapter.messageReadHandler = (participant) => this.onMessageRead(participant);
 
                 this.activateFriendListFetch();
 
@@ -437,7 +439,17 @@ export class NgChat implements OnInit, IChatController {
             this.participantsResponse = participantsResponse;
 
             this.participants = participantsResponse.map((response: ParticipantResponse) => {
+                const windowParticipant = this.windows.find(x => x.participant.id == response.participant.id);
+                if (windowParticipant) 
+                {
+                    windowParticipant.participant = response.participant;    
+                }
+                
                 return response.participant;
+            });
+
+            this.windows.forEach((window) => {
+                window.participant
             });
 
             this.participantsInteractedWith = [];
@@ -472,6 +484,25 @@ export class NgChat implements OnInit, IChatController {
             {
                 // Some messages are not pushed because they are loaded by fetching the history hence why we supply the message here
                 this.emitBrowserNotification(chatWindow[0], message);
+            }
+        }
+    }
+
+    // Handles read messages by the adapter
+    private onMessageRead(participant: IChatParticipant)
+    {
+        if (participant)
+        {
+            // Is this window opened?
+            const openedWindow = this.windows.find(x => x.participant.id == participant.id);
+
+            if (openedWindow)
+            {
+                const currentDate = new Date();
+
+                openedWindow.messages.forEach((msg)=>{
+                    msg.dateSeen = currentDate;
+                });
             }
         }
     }
@@ -595,13 +626,21 @@ export class NgChat implements OnInit, IChatController {
     // Marks all messages provided as read with the current time.
     markMessagesAsRead(messages: Message[]): void
     {
-        const currentDate = new Date();
+        if (this.userId != null)
+        {
+            const currentDate = new Date();
 
-        messages.forEach((msg)=>{
-            msg.dateSeen = currentDate;
-        });
+            const filteredMessages = messages.filter(msg => msg.fromId != this.userId && !msg.dateSeen);
 
-        this.onMessagesSeen.emit(messages);
+            //ENVIAR SOMENTE AS MENSAGENS QUE NÃO TINHAM SIDO LIDAS
+            if (filteredMessages.length > 0) {
+                filteredMessages.forEach((msg)=>{
+                    msg.dateSeen = currentDate;
+                });
+    
+                this.onMessagesSeen.emit(filteredMessages);
+            }
+        }
     }
 
     // Buffers audio file (For component's bootstrapping)
